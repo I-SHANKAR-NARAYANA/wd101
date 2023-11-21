@@ -1,4 +1,3 @@
-//index.js
 document.addEventListener("DOMContentLoaded", function () {
   const myForm = document.getElementById("myForm");
   const tableBody = document
@@ -13,6 +12,24 @@ document.addEventListener("DOMContentLoaded", function () {
       dob: document.getElementById("dob").value,
       acceptTerms: document.getElementById("acceptTerms").checked,
     };
+    const calculateAge = (dob) => {
+      const today = new Date();
+      const birthDate = new Date(dob);
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const monthDiff = today.getMonth() - birthDate.getMonth();
+      if (
+        monthDiff < 0 ||
+        (monthDiff === 0 && today.getDate() < birthDate.getDate())
+      ) {
+        age--;
+      }
+      return age;
+    };
+    const age = calculateAge(formData[dob]);
+    if (age < 18 || age > 55) {
+      alert("Only 18 to 55 allwed");
+      myForm.reset();
+    }
     const storedData = JSON.parse(localStorage.getItem("formData")) || [];
     storedData.push(formData);
     const newRow = tableBody.insertRow();
