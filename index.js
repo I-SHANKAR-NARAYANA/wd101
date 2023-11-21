@@ -1,3 +1,4 @@
+//index.js
 document.addEventListener("DOMContentLoaded", function () {
   const myForm = document.getElementById("myForm");
   const tableBody = document
